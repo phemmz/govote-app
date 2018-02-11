@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import { route } from 'preact-router';
 import style from './style';
 // import DisqusThread from '../../components/disqus/DisqusThread';
 import axios from 'axios';
@@ -83,6 +84,7 @@ export default class Search extends Component {
   }
   handleSubmit(event) {
     this.setState({ loading: false });
+    route(`/search?query=${this.state.value}`);
     mixpanel.track('User searched for: ' + this.state.value);
     axios.get('https://api.govote.org.ng/search?query=' + this.state.value + '&key=k9ihbvse57fvsujbsvsi5362WE$NFD2')
       .then(res => {
